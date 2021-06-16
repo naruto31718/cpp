@@ -16,10 +16,16 @@
 
 using namespace std;
 
-bool sortbysecdesc(const pair<int, int> &a,
-                   const pair<int, int> &b)
+bool sortbyknapsack(const pair<int, int> &a,
+                    const pair<int, int> &b)
 {
  return (double)(a.second / a.first) > (double)(b.second / b.first);
+}
+
+bool sortbyjob(const pair<int, int> &a,
+               const pair<int, int> &b)
+{
+ return a.first > b.first;
 }
 
 double fractional_kansack(int n, int weights[], int profit[], int capacity)
@@ -31,7 +37,7 @@ double fractional_kansack(int n, int weights[], int profit[], int capacity)
  {
   prof_with_weights.push_back(make_pair(weights[i], profit[i]));
  }
- sort(prof_with_weights.begin(), prof_with_weights.end(), sortbysecdesc);
+ sort(prof_with_weights.begin(), prof_with_weights.end(), sortbyknapsack);
 
  for (int i = 0; i < n; i++)
  {
@@ -50,98 +56,52 @@ double fractional_kansack(int n, int weights[], int profit[], int capacity)
  return prof;
 }
 
+int job_sequence(vector<int> profits, vector<int> deadlines, int n)
+{
+ vector<int> res;
+ int profit = 0;
+ int max = INT_MAX;
+ vector<bool> isFilled(max, false);
+ vector<pair<int, int>> profit_sorted;
+ for (int i = 0; i < n; i++)
+ {
+  profit_sorted.push_back(make_pair(profits[i], deadlines[i]));
+ }
+ sort(profit_sorted.begin(), profit_sorted.end(), sortbyjob);
+ for (int i = 0; i < n; i++)
+ {
+  if (!isFilled[profit_sorted[i].second - 1])
+  {
+   isFilled[profit_sorted[i].second - 1] = true;
+   profit += profit_sorted[i].first;
+   res.push_back(i);
+  }
+  else
+  {
+   int j = profit_sorted[i].second - 2;
+   while (j >= 0)
+   {
+    if (!isFilled[j])
+    {
+     isFilled[j] = true;
+     profit += profit_sorted[i].first;
+     res.push_back(i);
+     break;
+    }
+    j--;
+   }
+  }
+ }
+ for (auto i : res)
+ {
+  cout << i << " ";
+ }
+ return profit;
+}
+
 int main()
 {
- int weights[] = {2, 3, 5, 7, 1, 4, 1};
- int profits[] = {10, 5, 15, 7, 6, 18, 3};
- int capacity = 15;
- cout << fractional_kansack(7, weights, profits, capacity) << endl;
+ vector<int> d = {3, 4, 4, 2, 3, 1, 2};
+ vector<int> p = {35, 30, 25, 20, 15, 12, 5};
+ cout << job_sequence(p, d, 7) << endl;
 }
-// #include <bits/stdc++.h>
-
-// using namespace std;
-
-// // Structure for an item which stores
-// // weight & corresponding value of Item
-// struct Item
-// {
-//  int value, weight;
-
-//  // Constructor
-//  Item(int value, int weight)
-//      : value(value), weight(weight)
-//  {
-//  }
-// };
-
-// // Comparison function to sort Item
-// // according to val/weight ratio
-// bool cmp(struct Item a, struct Item b)
-// {
-//  double r1 = (double)a.value / a.weight;
-//  double r2 = (double)b.value / b.weight;
-//  return r1 > r2;
-// }
-
-// // Main greedy function to solve problem
-// double fractionalKnapsack(struct Item arr[],
-//                           int N, int size)
-// {
-//  // Sort Item on basis of ratio
-//  sort(arr, arr + size, cmp);
-
-//  // Current weight in knapsack
-//  int curWeight = 0;
-
-//  // Result (value in Knapsack)
-//  double finalvalue = 0.0;
-
-//  // Looping through all Items
-//  for (int i = 0; i < size; i++)
-//  {
-
-//   // If adding Item won't overflow,
-//   // add it completely
-//   if (curWeight + arr[i].weight <= N)
-//   {
-//    curWeight += arr[i].weight;
-//    finalvalue += arr[i].value;
-//   }
-
-//   // If we can't add current Item,
-//   // add fractional part of it
-//   else
-//   {
-//    int remain = N - curWeight;
-//    finalvalue += arr[i].value * ((double)remain / arr[i].weight);
-
-//    break;
-//   }
-//  }
-
-//  // Returning final value
-//  return finalvalue;
-// }
-
-// // Driver Code
-// int main()
-// {
-//  // Weight of knapsack
-//  int N = 15;
-
-//  // Given weights and values as a pairs
-//  Item arr[] = {{10, 2},
-//                {5, 3},
-//                {15, 5},
-//                {7, 7},
-//                {6, 1},
-//                {18, 4},
-//                {3, 1}};
-
-//  int size = sizeof(arr) / sizeof(arr[0]);
-
-//  // Function Call
-//  cout << "Maximum profit earned = "
-//       << fractionalKnapsack(arr, N, size);
-//  return 0;
-// }
