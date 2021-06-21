@@ -8,6 +8,9 @@
   "queue": "cpp",
   "deque": "cpp",
   "list": "cpp",
-  "iomanip": "cpp"
+  "iomanip": "cpp",
+  "stack": "cpp",
+  "filesystem": "cpp",
+  "string": "cpp"
  }
 }
