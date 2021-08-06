@@ -1,16 +1,22 @@
 {
- "C_Cpp.errorSquiggles": "Disabled",
- "files.associations": {
-  "algorithm": "cpp",
-  "iostream": "cpp",
-  "vector": "cpp",
-  "xstring": "cpp",
-  "queue": "cpp",
-  "deque": "cpp",
-  "list": "cpp",
-  "iomanip": "cpp",
-  "stack": "cpp",
-  "filesystem": "cpp",
-  "string": "cpp"
- }
+  "C_Cpp.errorSquiggles": "Disabled",
+  "files.associations": {
+    "algorithm": "cpp",
+    "iostream": "cpp",
+    "vector": "cpp",
+    "xstring": "cpp",
+    "queue": "cpp",
+    "deque": "cpp",
+    "list": "cpp",
+    "iomanip": "cpp",
+    "stack": "cpp",
+    "filesystem": "cpp",
+    "string": "cpp",
+    "type_traits": "cpp",
+    "random": "cpp",
+    "xhash": "cpp",
+    "xlocale": "cpp",
+    "xmemory0": "cpp",
+    "ostream": "cpp"
+  }
 }

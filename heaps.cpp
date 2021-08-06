@@ -49,8 +49,8 @@ void heapSort(vector<int> &arr)
  for (int i = n - 1; i > 0; i--)
  {
   int temp = arr[0];
-  arr[0] = arr[n - 1];
-  arr[n - 1] = temp;
+  arr[0] = arr[i];
+  arr[i] = temp;
   heapify(arr, 0, i);
  }
 }

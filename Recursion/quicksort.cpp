@@ -1,7 +1,8 @@
-Arrays - DS
+#include <bits/stdc++.h>
 
-    void
-    swap(int arr[], int i, int j)
+using namespace std;
+
+void swap(int arr[], int i, int j)
 {
     int temp = arr[i];
     arr[i] = arr[j];
@@ -43,10 +44,10 @@ int main()
         cout << i << " ";
     }
     cout << endl;
-    vector<int> v(10, 10);
-    vector<int>::iterator it;
-    for (it = v.begin(); it != v.end(); it++)
-    {
-        cout << *it << " ";
-    }
+    // vector<int> v(10, 10);
+    // vector<int>::iterator it;
+    // for (it = v.begin(); it != v.end(); it++)
+    // {
+    //     cout << *it << " ";
+    // }
 }
